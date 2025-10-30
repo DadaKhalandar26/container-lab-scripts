@@ -1,0 +1,35 @@
+---
+name: Cisco_Branch_LAB-01
+
+mgmt:
+  network: mgmt
+  ipv4-subnet: 192.168.29.0/24
+
+topology:
+  nodes:
+    NA-LAB-CD01:
+      kind: cisco_iol
+      image: cisco_iol-l3:17.12.01
+      mgmt-ipv4: 192.168.29.61
+    NA-LAB-CD02:
+      kind: cisco_iol
+      image: cisco_iol-l3:17.12.01
+      mgmt-ipv4: 192.168.29.62
+    NA-LAB-UA01:
+      kind: cisco_iol
+      image: cisco_iol-l2:17.12.01
+      type: l2
+      mgmt-ipv4: 192.168.29.63
+    NA-LAB-UA02:
+      kind: cisco_iol
+      image: cisco_iol-l2:17.12.01
+      type: l2
+      mgmt-ipv4: 192.168.29.64
+
+
+  links:
+    - endpoints: ["NA-LAB-CD01:Ethernet0/1","NA-LAB-CD02:Ethernet0/1"]
+    - endpoints: ["NA-LAB-CD01:Ethernet0/2","NA-LAB-UA02:Ethernet0/2"]
+    - endpoints: ["NA-LAB-CD02:Ethernet0/2","NA-LAB-UA01:Ethernet0/2"]
+    - endpoints: ["NA-LAB-CD01:Ethernet0/3","NA-LAB-UA01:Ethernet0/3"]
+    - endpoints: ["NA-LAB-CD02:Ethernet0/3","NA-LAB-UA02:Ethernet0/3"]
